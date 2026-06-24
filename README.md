@@ -26,13 +26,13 @@ The set splits into three jobs: **apply** the variation reliably, **trigger** it
 
 ## Apply
 
-### `waitFor(target, { timeout, interval })`
+### `waitFor(selectorOrPredicate, callback, timeoutMs?)`
 
-Wait for an element to appear, or for any condition to become true, then resolve. Pass a **selector string** and it resolves with the element the moment it appears (watched with a `MutationObserver`, so no guessing a `setTimeout`). Pass a **predicate function** and it resolves with the return value once it is truthy (polled, since a condition can flip without a DOM change). Rejects on timeout. Exported as `waitForElement` too.
+Wait for a DOM element or an arbitrary condition, then fire `callback` once. Pass a **selector string** and it polls `document.querySelector` and fires `callback(element)` on the first match. Pass a **predicate function** and it polls the predicate and fires `callback(null)` when it returns truthy (use this for non-DOM waits like `() => typeof window.tealiumDataLayer === 'object'`). Polls at 50ms, gives up silently after `timeoutMs` (default 5000), and wraps the lookup, predicate, and callback in try/catch so variant code can never break the host page. Single-fire. Returns a `cancel()`. Exported as `waitForElement` too.
 
 ```js
-await waitFor('[data-qa="add-to-basket"]');       // element
-await waitFor(() => window.dataLayer?.length > 0); // condition
+waitFor('[data-qa="add-to-basket"]', (el) => { /* apply the variation */ });
+waitFor(() => window.dataLayer?.length > 0, () => track('ready'));
 ```
 
 Full write-up: [How to wait for an element in an A/B test](https://arafatcro.dev/guides/waitforelement-ab-test)
@@ -55,7 +55,7 @@ Element-scoped anti-flicker. Hide only the elements your variation changes, then
 
 ```js
 const reveal = hideUntilApplied('[data-qa="hero-cta"]');
-waitFor('[data-qa="hero-cta"]').then((el) => {
+waitFor('[data-qa="hero-cta"]', (el) => {
   el.textContent = 'Start free trial';
   reveal();
 });

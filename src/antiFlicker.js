@@ -26,7 +26,7 @@ function hideUntilApplied(selector, { timeout = 1000 } = {}) {
 
 // usage (pairs with waitFor)
 // const reveal = hideUntilApplied('[data-qa="hero-cta"]');
-// waitFor('[data-qa="hero-cta"]').then((el) => {
+// waitFor('[data-qa="hero-cta"]', (el) => {
 //   el.textContent = 'Start free trial';
 //   reveal();
 // });
