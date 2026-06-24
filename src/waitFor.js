@@ -66,4 +66,92 @@ function waitFor(selectorOrPredicate, callback, timeoutMs = 5000) {
 // waitFor(() => window.dataLayer?.length > 0, () => track('ready'));
 // const cancel = waitFor('.late', apply); // cancel() to stop early
 
-export { waitFor, waitFor as waitForElement };
+
+// waitForAll(targets, callback, timeoutMs?)
+//
+// Wait for EVERY target to be satisfied, then fire callback(results) once.
+// `targets` is an array of selectors and/or predicates. results[i] is the matched
+// element (for a selector) or true (for a predicate), in the same order, so you
+// get everything handed back without re-querying. Same 50ms poll, silent timeout,
+// try/catch, single-fire, and cancel() as waitFor.
+
+function waitForAll(targets, callback, timeoutMs = 5000) {
+  const started = Date.now();
+  let done = false;
+  const cancel = () => { done = true; clearInterval(poll); };
+
+  const resolveOne = (target) => {
+    try {
+      return typeof target === "function" ? (target() ? true : null) : document.querySelector(target);
+    } catch (e) {
+      return null; // a thrown selector or predicate just means "not ready yet"
+    }
+  };
+
+  const poll = setInterval(() => {
+    if (done) return;
+    const results = targets.map(resolveOne);
+    if (results.every(Boolean)) {
+      done = true;
+      clearInterval(poll);
+      try { callback(results); } catch (e) { /* never break the host page */ }
+      return;
+    }
+    if (Date.now() - started >= timeoutMs) {
+      done = true;
+      clearInterval(poll); // silent give-up
+    }
+  }, 50);
+
+  return cancel;
+}
+
+// usage
+// waitForAll(['.price', '.add-to-cart', () => window.app?.ready], ([price, cta]) => {
+//   // every target ready; price and cta are the matched elements
+// });
+
+
+// waitForAny(targets, callback, timeoutMs?)
+//
+// Wait for the FIRST target to be satisfied, then fire callback(result, index).
+// `result` is the matched element or true; `index` is which target won. Useful
+// when a layout can render one of several ways. Same poll, timeout, and cancel().
+
+function waitForAny(targets, callback, timeoutMs = 5000) {
+  const started = Date.now();
+  let done = false;
+  const cancel = () => { done = true; clearInterval(poll); };
+
+  const resolveOne = (target) => {
+    try {
+      return typeof target === "function" ? (target() ? true : null) : document.querySelector(target);
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const poll = setInterval(() => {
+    if (done) return;
+    for (let i = 0; i < targets.length; i++) {
+      const hit = resolveOne(targets[i]);
+      if (hit) {
+        done = true;
+        clearInterval(poll);
+        try { callback(hit, i); } catch (e) { /* never break the host page */ }
+        return;
+      }
+    }
+    if (Date.now() - started >= timeoutMs) {
+      done = true;
+      clearInterval(poll); // silent give-up
+    }
+  }, 50);
+
+  return cancel;
+}
+
+// usage
+// waitForAny(['.modal-v1', '.modal-v2'], (el, i) => trapFocus(el)); // whichever renders
+
+export { waitFor, waitFor as waitForElement, waitForAll, waitForAny };
