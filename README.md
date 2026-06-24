@@ -22,7 +22,8 @@ The set splits into three jobs: **apply** the variation reliably, **trigger** it
 | Helper | Job | What it does |
 | --- | --- | --- |
 | ⏳ `waitFor` | Apply | wait for an element or a condition |
-| 🔗 `waitForAll` / `waitForAny` | Apply | wait for several things together |
+| 🔗 `waitForAll` | Apply | wait until several targets are all ready |
+| 🔀 `waitForAny` | Apply | fire on the first of several targets |
 | 🧭 `onRouteChange` | Apply | re-run on SPA navigation |
 | 🙈 `hideUntilApplied` | Apply | element-scoped anti-flicker |
 | ⚛️ `setReactValue` | Apply | set a React controlled input |
