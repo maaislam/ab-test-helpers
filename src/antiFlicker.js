@@ -9,7 +9,7 @@
 // the whole page is what kills Largest Contentful Paint: scope it to what you
 // touch instead.
 //
-// Full write-up: https://arafatcro.dev/guides/stop-ab-test-flicker
+// Full write-up: https://arafatcro.com/guides/stop-ab-test-flicker
 
 function hideUntilApplied(selector, { timeout = 1000 } = {}) {
   const style = document.createElement("style");

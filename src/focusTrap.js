@@ -8,7 +8,7 @@
 // This traps ONE layer. When you stack layers (a drawer with a modal on top),
 // inert each new layer relative to the layer above it, not the body.
 //
-// Full write-up: https://arafatcro.dev/guides/accessible-ab-test-variants
+// Full write-up: https://arafatcro.com/guides/accessible-ab-test-variants
 
 function trapFocus(container) {
   const previouslyFocused = document.activeElement;

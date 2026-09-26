@@ -9,7 +9,7 @@
 // a way the patch does not see). It infers navigation from DOM changes, so it is
 // heavier: keep the callback cheap.
 //
-// Full write-up: https://arafatcro.dev/guides/optimizely-experiment-not-firing-spa-route-changes
+// Full write-up: https://arafatcro.com/guides/optimizely-experiment-not-firing-spa-route-changes
 
 const ROUTE_EVENT = "abRouteChange";
 

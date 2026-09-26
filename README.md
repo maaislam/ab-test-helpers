@@ -9,7 +9,7 @@
 
 No build step. No install. No dependencies. Each helper is one standalone file you paste straight into your variation code. They are vendor-neutral, so they work the same on Optimizely, VWO, Convert, Adobe Target, or your own rig.
 
-Every helper is the cleaned-up version of a technique used on real client builds. The full write-up behind most of them lives at 👉 [arafatcro.dev/guides](https://arafatcro.dev/guides).
+Every helper is the cleaned-up version of a technique used on real client builds. The full write-up behind most of them lives at 👉 [arafatcro.com/guides](https://arafatcro.com/guides/).
 
 ## ✨ Why these exist
 
@@ -57,7 +57,7 @@ waitFor(() => window.dataLayer?.length > 0, () => track('ready'));
 const cancel = waitFor('.late', apply); // call cancel() to stop early
 ```
 
-📝 Full write-up: [How to wait for an element in an A/B test](https://arafatcro.dev/guides/waitforelement-ab-test)
+📝 Full write-up: [How to wait for an element in an A/B test](https://arafatcro.com/guides/waitforelement-ab-test)
 
 ---
 
@@ -92,7 +92,7 @@ run();              // first load
 onRouteChange(run); // every navigation after
 ```
 
-📝 Full write-up: [Optimizely experiment not firing on SPA route changes](https://arafatcro.dev/guides/optimizely-experiment-not-firing-spa-route-changes)
+📝 Full write-up: [Optimizely experiment not firing on SPA route changes](https://arafatcro.com/guides/optimizely-experiment-not-firing-spa-route-changes)
 
 ---
 
@@ -108,7 +108,7 @@ waitFor('[data-qa="hero-cta"]', (el) => {
 });
 ```
 
-📝 Full write-up: [How to stop A/B test flicker without killing LCP](https://arafatcro.dev/guides/stop-ab-test-flicker)
+📝 Full write-up: [How to stop A/B test flicker without killing LCP](https://arafatcro.com/guides/stop-ab-test-flicker)
 
 ---
 
@@ -121,7 +121,7 @@ const qty = document.querySelector('input[name="quantity"]');
 setReactValue(qty, '3'); // basket total and stock check now recalculate
 ```
 
-📝 Full write-up: [Changing a React controlled input in an A/B test](https://arafatcro.dev/guides/react-controlled-input-ab-test)
+📝 Full write-up: [Changing a React controlled input in an A/B test](https://arafatcro.com/guides/react-controlled-input-ab-test)
 
 ---
 
@@ -134,7 +134,7 @@ const close = trapFocus(document.querySelector('.my-variant-modal'));
 closeButton.addEventListener('click', close);
 ```
 
-📝 Full write-up: [Building accessible A/B test variants](https://arafatcro.dev/guides/accessible-ab-test-variants)
+📝 Full write-up: [Building accessible A/B test variants](https://arafatcro.com/guides/accessible-ab-test-variants)
 
 <br>
 
@@ -215,14 +215,14 @@ Or, for a variation editor that takes a plain script, copy the function body str
 
 # 🗺️ Guides to write
 
-The repo runs ahead of the writing. These helpers are the next write-ups planned for [arafatcro.dev/guides](https://arafatcro.dev/guides):
+The repo runs ahead of the writing. These helpers are the next write-ups planned for [arafatcro.com/guides](https://arafatcro.com/guides/):
 
 - 👋 `exit-intent-ab-test` &rarr; getting exit intent right on desktop and mobile
 - 🔁 `frequency-capping-popups` &rarr; show it once, not on every page
 
 # 👋 About
 
-Maintained by Arafat, a freelance CRO developer. I build and ship client side experiments and write up the hard parts at [arafatcro.dev](https://arafatcro.dev). If a helper here saved you time, the [guides](https://arafatcro.dev/guides) go deeper on the why.
+Maintained by Arafat, a freelance CRO developer. I build and ship client side experiments and write up the hard parts at [arafatcro.com](https://arafatcro.com). If a helper here saved you time, the [guides](https://arafatcro.com/guides/) go deeper on the why.
 
 # 📄 License
 

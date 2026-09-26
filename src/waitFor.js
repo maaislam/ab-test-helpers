@@ -20,7 +20,7 @@
 //
 // Returns a `cancel()` function to stop early. `waitForElement` is an alias.
 //
-// Full write-up: https://arafatcro.dev/guides/waitforelement-ab-test
+// Full write-up: https://arafatcro.com/guides/waitforelement-ab-test
 
 function waitFor(selectorOrPredicate, callback, timeoutMs = 5000) {
   const isPredicate = typeof selectorOrPredicate === "function";

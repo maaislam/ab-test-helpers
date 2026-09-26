@@ -9,7 +9,7 @@
 // HTMLTextAreaElement.prototype or HTMLSelectElement.prototype. Checkboxes and
 // radios track "checked", not "value", so they need their own path.
 //
-// Full write-up: https://arafatcro.dev/guides/react-controlled-input-ab-test
+// Full write-up: https://arafatcro.com/guides/react-controlled-input-ab-test
 
 function setReactValue(input, value) {
   const nativeSetter = Object.getOwnPropertyDescriptor(
